@@ -117,12 +117,13 @@ module DiscussionsHelper
       else
         t :'simple_form.labels.discussion.of_no_group'
       end
+    icon =
     header = t "simple_form.labels.discussion.privacy_public_header"
     description = t 'simple_form.labels.discussion.privacy_public_description'
-    options << ["<span class='discussion-privacy-setting-header'>#{header}</strong><br /><p>#{description}</p>".html_safe, false]
+    options << ["<span class='discussion-privacy-setting-header'>{header}<br /><p>#{description}</p>".html_safe, false]
 
     header = t "simple_form.labels.discussion.privacy_private_header"
     description = t(:'simple_form.labels.discussion.privacy_private_description', group: group)
-    options << ["<span class='discussion-privacy-setting-header'>#{header}</strong><br /><p>#{description}</p>".html_safe, true ]
+    options << ["<span class='discussion-privacy-setting-header'>#{header}<br /><p>#{description}</p>".html_safe, true ]
   end
 end

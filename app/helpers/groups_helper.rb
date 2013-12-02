@@ -86,7 +86,7 @@ module GroupsHelper
     Group::PRIVACY_CATEGORIES.each do |privacy_setting|
       header = t "simple_form.labels.group.privacy_#{privacy_setting}_header"
       description = t "simple_form.labels.group.privacy_#{privacy_setting}_description"
-      privacy_settings << ["<span class='privacy-setting-header'>#{header}</strong><br /><p>#{description}</p>".html_safe, privacy_setting.to_sym]
+      privacy_settings << ["<span class='privacy-setting-header'>#{header}<br /><p>#{description}</p>".html_safe, privacy_setting.to_sym]
     end
     privacy_settings
   end
