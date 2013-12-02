@@ -22,7 +22,6 @@ body.discussions.new, body.discussions.create {
   textarea {
     @include placeholder { font-style: italic; }
     font-size: 16px;
-    margin-bottom: 1.6em;
     height: 100px;
   }
 
@@ -65,7 +64,7 @@ body.discussions.new, body.discussions.create {
   }
 // -----------
 
-
+  .discussion_private { margin-top: 2.6em; }
 
 
   #discussion-markdown-dropdown {
