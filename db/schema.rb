@@ -182,7 +182,7 @@ ActiveRecord::Schema.define(:version => 20131202050646) do
     t.boolean  "is_deleted",      :default => false, :null => false
     t.integer  "comments_count",  :default => 0,     :null => false
     t.integer  "items_count",     :default => 0,     :null => false
-    t.boolean  "private",         :default => true
+    t.boolean  "private"
   end
 
   add_index "discussions", ["author_id"], :name => "index_discussions_on_author_id"

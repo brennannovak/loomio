@@ -1,5 +1,5 @@
 class AddPrivacyToDiscussions < ActiveRecord::Migration
   def change
-    add_column :discussions, :private, :boolean, :default => true
+    add_column :discussions, :private, :boolean, null: true
   end
 end
