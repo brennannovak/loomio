@@ -723,7 +723,9 @@ en:
         privacy_public_header: "Public"
         privacy_public_description: "Anyone can see the discussion"
         privacy_private_header: "Private"
-        privacy_private_description: "Only members of %{group} can see the discussion"
+        privacy_private_description: "Only members %{group} can see the discussion"
+        of: "of "
+        of_no_group: "of this group"
       group:
         name: "Group name"
         description: "Description"

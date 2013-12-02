@@ -112,9 +112,9 @@ module DiscussionsHelper
   def discussion_privacy_options(discussion)
     options = []
     if discussion.group_id == nil
-      group = "this group"
+      group = t :'simple_form.labels.discussion.of_no_group'
     else
-      group = discussion.group.name
+      group = t(:'simple_form.labels.discussion.of') + discussion.group.name
     end
     header = t "simple_form.labels.discussion.privacy_public_header"
     description = t 'simple_form.labels.discussion.privacy_public_description'
