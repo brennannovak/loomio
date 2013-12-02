@@ -761,8 +761,8 @@ en:
 
     placeholders:
       discussion:
-        title: "What is the topic you'd like to discuss?"
-        description: "This information will appear at the top of the discussion page. Introduce the topic and give enough context for your group to have a well-informed discussion."
+        title: "Title"
+        description: "Give some context..."
       membership_request:
         introduction: "Write a few words about who you are and why you would like to join %{group_name}."
       motion:
