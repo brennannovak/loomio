@@ -10,8 +10,21 @@ Feature: Discussion author sets discussion privacy
 
   Background:
     Given I am logged in
-    And I belong to a group
 
   Scenario: Discussion author sets privacy
+    Given I am a member of a group
     When I create a discussion
-    Then
+    And I choose to make the discussion private
+    Then the discussion should be set to private
+    And only group members can see the discussion
+
+  Scenario: Discussion author changes privacy
+    Given I am a member of a group
+    And there is a private discussion
+    When I change the discussion privacy to public
+    Then anyone can see the disucssion
+
+  Scenario:
+
+
+
