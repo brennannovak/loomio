@@ -108,4 +108,15 @@ module DiscussionsHelper
       false
     end
   end
+
+  def discussion_privacy_options(discussion)
+    options = []
+    header = t "simple_form.labels.discussion.privacy_public_header"
+    description = t "simple_form.labels.discussion.privacy_public_description"
+    options << ["<span class='discussion-privacy-setting-header'>#{header}</strong><br /><p>#{description}</p>".html_safe, false]
+
+    header = t "simple_form.labels.discussion.privacy_private_header"
+    description = t "simple_form.labels.discussion.privacy_private_description"
+    options << ["<span class='discussion-privacy-setting-header'>#{header}</strong><br /><p>#{description}</p>".html_safe, true ]
+  end
 end

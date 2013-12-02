@@ -10,7 +10,7 @@
           = f.input :group_id, :as => :hidden
       = f.input :title, autofocus: true, input_html: {class: 'js-warn-before-navigating-away'}
       = f.input :description, input_html: {class: 'js-warn-before-navigating-away'}
-      = f.input :private, :as => "radio_buttons", collection: discussion_privacy_options(group)
+      = f.input :private, as: :radio_buttons, collection: discussion_privacy_options(discussion)
       = f.hidden_field 'uses_markdown', value: @uses_markdown, id: 'global-uses-markdown'
       = f.submit :class => "btn btn-large btn-info", id: "discussion-submit", :data => {:disable_with => t("helpers.submit.discussion.create")}
       .dropdown#discussion-markdown-dropdown.global-markdown-setting
