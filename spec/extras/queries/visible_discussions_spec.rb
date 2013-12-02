@@ -9,7 +9,32 @@ describe Queries::VisibleDiscussions do
     Queries::VisibleDiscussions.new(user: user, groups: [group])
   end
 
-  describe 'privacy' do
+  describe 'private? (discussusion)' do
+    context 'true (aka private)' do
+      before { discussion.update_attribute(:private, true)}
+
+      it 'members can see discussion' do
+        subject.should include discussion
+      end
+
+      it 'visitors cannot see discussion' do
+        subject.should_not include discussion
+      end
+    end
+
+    context 'false (aka public)' do
+      it 'members can see discussion' do
+        subject.should include discussion
+      end
+
+      it 'visitors can see discussion' do
+        subject.should include discussion
+      end
+    end
+
+  end
+
+  describe 'group privacy' do
     context 'public (aka public)' do
       before { group.update_attribute(:privacy, 'public') }
 

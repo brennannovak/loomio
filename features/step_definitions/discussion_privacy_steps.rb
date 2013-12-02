@@ -1,13 +1,24 @@
-
-Given(/^there are other group members$/) do
-  @group.add_member! @group_member
-end
-
 When(/^I create a private discussion$/) do
   @discussion = create_discussion group: @group, private: true
 end
 
-Then(/^only group members can see the discussion$/) do
+Then(/^I should see that the group is set to private$/) do
+  pending # express the regexp above with the code you wish you had
+end
+
+When(/^I visit a public group$/) do
+  pending # express the regexp above with the code you wish you had
+end
+
+Then(/^I should see public discussions$/) do
+  pending # express the regexp above with the code you wish you had
+end
+
+Then(/^I should not see private discussions$/) do
+  pending # express the regexp above with the code you wish you had
+end
+
+Given(/^I visit a public group$/) do
   pending # express the regexp above with the code you wish you had
 end
 
@@ -23,7 +34,7 @@ When(/^I change the discussion privacy to public$/) do
   pending # express the regexp above with the code you wish you had
 end
 
-Then(/^anyone can see the disucssion$/) do
+Then(/^I should see that the group is set to public$/) do
   pending # express the regexp above with the code you wish you had
 end
 
