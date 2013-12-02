@@ -111,12 +111,17 @@ module DiscussionsHelper
 
   def discussion_privacy_options(discussion)
     options = []
+    if discussion.group_id == nil
+      group = "this group"
+    else
+      group = discussion.group.name
+    end
     header = t "simple_form.labels.discussion.privacy_public_header"
-    description = t "simple_form.labels.discussion.privacy_public_description"
+    description = t 'simple_form.labels.discussion.privacy_public_description'
     options << ["<span class='discussion-privacy-setting-header'>#{header}</strong><br /><p>#{description}</p>".html_safe, false]
 
     header = t "simple_form.labels.discussion.privacy_private_header"
-    description = t "simple_form.labels.discussion.privacy_private_description"
+    description = t(:'simple_form.labels.discussion.privacy_private_description', group: group)
     options << ["<span class='discussion-privacy-setting-header'>#{header}</strong><br /><p>#{description}</p>".html_safe, true ]
   end
 end
