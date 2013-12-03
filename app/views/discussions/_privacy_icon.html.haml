@@ -1,8 +1,6 @@
-.dropdown.privacy-dropdown
-  - privacy = privacy_language(discussion)
-  - icon_type = privacy_icon(discussion)
-  - header = t "simple_form.labels.discussion.privacy_#{privacy}_header"
-  - description = t "simple_form.labels.discussion.privacy_#{privacy}_description", group: t(:"simple_form.labels.discussion.of_no_group")
-  %span#privacy{"data-title" => "#{header}: #{description}", 'data-container'=> 'body' }
-    =# image_tag("icon"+privacy.to_s+".png", alt: privacy.to_s, :id => 'privacy-image')
-    %i{class: "icon-#{icon_type}"}
+- privacy = privacy_language(discussion)
+- icon_type = privacy_icon(discussion)
+- header = t "simple_form.labels.discussion.privacy_#{privacy}_header"
+- description = t "simple_form.labels.discussion.privacy_#{privacy}_description", group: t(:"simple_form.labels.discussion.of_no_group")
+%span#privacy{"data-title" => "#{header}: #{description}", 'data-container'=> 'body' }
+  %i{class: "icon-#{icon_type}", alt: privacy.to_s, :id => 'privacy-image'}

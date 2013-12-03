@@ -1,4 +1,4 @@
 .page-container
   - group = GroupDecorator.decorate(@discussion.group) if @discussion.group
-  = render '/groups/title', group: group
+  = render '/groups/title', group: group, discussion: nil
   = render "/discussions/form", :discussion => @discussion, :user_groups => @user_groups
