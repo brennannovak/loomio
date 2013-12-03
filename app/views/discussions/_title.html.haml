@@ -2,7 +2,7 @@
   .discussion-title-container
     %h2#discussion-title
       = discussion.title
-      =# render 'groups/privacy_dropdown', discussion: discussion
+      = render 'discussions/privacy_icon', discussion: discussion
     #edit-discussion-title.hidden
       = form_tag edit_title_discussion_path, method: :post do |f|
         = hidden_field_tag 'id'

@@ -127,5 +127,13 @@ module DiscussionsHelper
     options << ["<span class='discussion-privacy-setting-header'><i class='icon-lock'></i>#{header}<br /><p>#{description}</p>".html_safe, true ]
   end
 
+  def privacy_language(discussion)
+    discussion.private? ? "private" : "public"
+  end
+
+  def privacy_icon(discussion)
+    discussion.private? ? "lock" : "globe"
+  end
+
 
 end
