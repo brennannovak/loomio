@@ -14,6 +14,7 @@ class User < ActiveRecord::Base
   # Include default devise modules. Others available are:
   # :token_authenticatable, :encryptable, :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :recoverable, :registerable, :rememberable, :trackable, :omniauthable
+  attr_accessor :honeypot
 
   validates :name, :presence => true
   validates :email, :presence => true, uniqueness: true, email: true
@@ -55,7 +56,7 @@ class User < ActiveRecord::Base
   has_many :public_groups,
            :through => :memberships,
            :source => :group,
-           :conditions => { :viewable_by => 'everyone' }
+           :conditions => { :privacy => 'public' }
   has_many :adminable_groups,
            :through => :admin_memberships,
            :class_name => 'Group',
