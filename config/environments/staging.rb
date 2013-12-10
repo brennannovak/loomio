@@ -61,7 +61,7 @@ Loomio::Application.configure do
   }
 
   if ENV['ENABLE_STAGING_EMAILS']
-    # Send emails using SendGrid
+    # Send emails using SMTP service
     config.action_mailer.delivery_method = :smtp
     config.action_mailer.smtp_settings = {
       :address        => ENV['SMTP_SERVER'],
