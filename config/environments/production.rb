@@ -62,7 +62,7 @@ Loomio::Application.configure do
 
   config.action_mailer.perform_deliveries = true
 
-  # Send emails using SendGrid
+  # Send emails using SMTP service
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
     :address        => ENV['SMTP_SERVER'],
