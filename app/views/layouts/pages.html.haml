@@ -21,7 +21,6 @@
           .pull-right
             - unless current_page? new_user_session_path
               =link_to t(:'devise.sessions.sign_in'), new_user_session_path, class: 'btn btn-info'
-
           .span11
             =link_to image_tag("mailpile-logo-text-public.png"), "/"
 
