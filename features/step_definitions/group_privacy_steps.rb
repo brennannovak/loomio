@@ -14,10 +14,10 @@ Given /^a public group exists$/ do
   @group.save!
 end
 
-Given /^a secret group exists$/ do
+Given /^a hidden group exists$/ do
   @group = FactoryGirl.create :group
-  @group.privacy = 'secret'
-  @group.description = "this group is secret"
+  @group.privacy = 'hidden'
+  @group.description = "this group is hidden"
   @group.save
 end
 
@@ -37,16 +37,16 @@ Given /^a public sub\-group exists$/ do
                                   :privacy => 'public'
 end
 
-Given /^a secret sub\-group exists$/ do
+Given /^a hidden sub\-group exists$/ do
   @parent_group = FactoryGirl.create :group
   @sub_group = FactoryGirl.create :group, :parent => @parent_group
-  @sub_group.privacy = 'secret'
+  @sub_group.privacy = 'hidden'
   @sub_group.save
 end
 
 Given /^a sub\-group viewable by parent\-group members exists$/ do
   @parent_group = FactoryGirl.create :group
-  @sub_group = FactoryGirl.create :group, :parent => @parent_group, privacy: 'secret', viewable_by_parent_members: true
+  @sub_group = FactoryGirl.create :group, :parent => @parent_group, privacy: 'hidden', viewable_by_parent_members: true
   @sub_group.save
 end
 
@@ -73,21 +73,21 @@ Given /^a public group exists that I am not a member of$/ do
   step "a public group exists"
 end
 
-Given /^I am a member of a secret group$/ do
-  step "a secret group exists"
+Given /^I am a member of a hidden group$/ do
+  step "a hidden group exists"
   @group.add_member! @user
 end
 
-Given /^a secret group exists that I am not a member of$/ do
-  step "a secret group exists"
+Given /^a hidden group exists that I am not a member of$/ do
+  step "a hidden group exists"
 end
 
 Given /^a public sub\-group exists that I am not a member of$/ do
   step "a public sub-group exists"
 end
 
-Given /^a secret sub\-group exists that I am not a member of$/ do
-  step "a secret sub-group exists"
+Given /^a hidden sub\-group exists that I am not a member of$/ do
+  step "a hidden sub-group exists"
 end
 
 Given /^I am a member of a public sub\-group$/ do
@@ -96,8 +96,8 @@ Given /^I am a member of a public sub\-group$/ do
   @sub_group.add_member! @user
 end
 
-Given /^I am a member of a secret sub\-group$/ do
-  step "a secret sub-group exists"
+Given /^I am a member of a hidden sub\-group$/ do
+  step "a hidden sub-group exists"
   @parent_group.add_member! @user
   @sub_group.add_member! @user
 end
@@ -112,7 +112,7 @@ Given /^I am a member of a parent\-group that has a sub\-group viewable by paren
   @parent_group = FactoryGirl.create :group
   @admin_user = FactoryGirl.create :user
   @parent_group.add_admin! @admin_user
-  @sub_group = FactoryGirl.create :group, :parent => @parent_group, :privacy => 'secret', :viewable_by_parent_members => true
+  @sub_group = FactoryGirl.create :group, :parent => @parent_group, :privacy => 'hidden', :viewable_by_parent_members => true
   @sub_group.add_admin! @admin_user
   @parent_group.add_member! @user
 end
@@ -167,7 +167,7 @@ Given(/^I am a member of a parent\-group that has sub\-groups I don't belong to$
   @parent_group = FactoryGirl.create :group
   @parent_group.add_member! @user
   @sub_groups = []
-  ['secret', 'public'].each do |privacy|
+  ['hidden', 'public'].each do |privacy|
     @sub_groups << FactoryGirl.create(:group,
                                       parent: @parent_group,
                                       privacy: privacy,
@@ -194,21 +194,21 @@ Given(/^I am a coordinator of a public group$/) do
   @group.privacy = 'public'
 end
 
-When(/^I set the group to secret$/) do
+When(/^I set the group to hidden$/) do
   visit edit_group_path(@group)
-  choose 'group_privacy_secret'
+  choose 'group_privacy_hidden'
   click_on 'group_form_submit'
 end
 
-Then(/^the group should be set to secret$/) do
+Then(/^the group should be set to hidden$/) do
   @group.reload
-  @group.privacy.should == 'secret'
+  @group.privacy.should == 'hidden'
 end
 
-Given(/^I am a coordinator of a secret group$/) do
+Given(/^I am a coordinator of a hidden group$/) do
   @group = FactoryGirl.create :group
   @group.add_admin! @user
-  @group.privacy = 'secret'
+  @group.privacy = 'hidden'
 end
 
 When(/^I set the group to public$/) do
@@ -223,7 +223,7 @@ Then(/^the group should be set to public$/) do
   @group.privacy = 'public'
 end
 
-Given(/^I am a coordinator of a secret subgroup$/) do
+Given(/^I am a coordinator of a hidden subgroup$/) do
   @parent_group = FactoryGirl.create :group
   @parent_group.add_member! @user
   @subgroup = FactoryGirl.create :group, parent: @parent_group
@@ -242,4 +242,53 @@ end
 Then(/^the subgroup should be viewable by parent members$/) do
   @subgroup.reload
   @subgroup.should be_viewable_by_parent_members
+end
+
+When(/^I set the group to private$/) do
+  visit edit_group_path(@group)
+  choose 'group_privacy_private'
+  click_on 'group_form_submit'
+end
+
+Then(/^the group should be set to private$/) do
+  @group.reload
+  @group.privacy.should == 'private'
+end
+
+Given(/^a private group exists$/) do
+  @group = FactoryGirl.create :group
+  @group.privacy = 'private'
+  @group.save
+end
+
+Then(/^I should not see the discussion$/) do
+  page.should_not have_content(@discussion.title)
+end
+
+Then(/^I should see the group members$/) do
+  page.should have_css('#users-list')
+end
+
+Then(/^I should not see previous decisions$/) do
+  page.should_not have_css('#show-closed-motions')
+end
+
+Given(/^I am a member of a private group$/) do
+  @group = FactoryGirl.create :group
+  @group.privacy = 'private'
+  @group.add_member! @user
+  @group.save
+end
+
+Given(/^a private sub\-group exists$/) do
+  @parent_group = FactoryGirl.create :group
+  @sub_group = FactoryGirl.create :group, :parent => @parent_group
+  @sub_group.privacy = 'private'
+  @sub_group.save
+end
+
+Given(/^I am a member of a private sub\-group$/) do
+  step "a private sub\-group exists"
+  @parent_group.add_member! @user
+  @sub_group.add_member! @user
 end

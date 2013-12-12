@@ -16,7 +16,9 @@ class Ability
         case group.privacy.to_s
         when 'public'
           true
-        when 'secret'
+        when 'private'
+          true
+        when 'hidden'
           if group.viewable_by_parent_members?
             @member_group_ids.include?(group.id) or @member_group_ids.include?(group.parent_id)
           else
@@ -115,7 +117,12 @@ class Ability
     end
 
     can :show, Discussion do |discussion|
-      can? :show, discussion.group
+      group = discussion.group
+      if group.privacy == 'public' || group.members.include?(user)
+        can? :show, group
+      else
+        false
+      end
     end
 
     can [:destroy,
